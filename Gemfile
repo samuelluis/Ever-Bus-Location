@@ -24,7 +24,7 @@ end
 
 group :production do
 	gem 'thin'
-  gem 'mysql2'
+  gem 'pg'
 end
 
 group :test do
