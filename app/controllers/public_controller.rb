@@ -29,6 +29,7 @@ class PublicController < ApplicationController
     
     time = log.created_at
     travel_time = route_detail.route_branch.travel_time
+    travel_time = travel_time.hour*60*60 + travel_time.min*60 + travel_time.sec
     
     text = ("<div id='message'>
               <div id='bus_name_div'>
@@ -48,7 +49,7 @@ class PublicController < ApplicationController
               </div>
               <div id='supposed_arrival_time_div'>
                 <label>
-                  <b>Suppose arrival time: </b><span id='supposed_arrival_time'>#{reminder(time, travel_time)}</span>
+                  <b>Suppose arrival time: </b><span id='supposed_arrival_time'>#{reminder(time, travel_time).strftime("%I:%M:%S %p")}</span>
                 </label>
               </div>
             </div>").html_safe
@@ -57,7 +58,7 @@ class PublicController < ApplicationController
   end
   
   def reminder(time, travel_time)
-    #reminder_time = time + travel_time.seconds
+    reminder_time = time + travel_time.seconds
     reminder_time
   end
 end
