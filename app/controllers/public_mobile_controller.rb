@@ -21,7 +21,7 @@ class PublicMobileController < ApplicationController
   def getRoutes
     routes = []
     routes = Route.where(:company_id => params[:company_id]) if !params[:company_id].empty?
-    options = ""
+    options = "<option></option>"
     routes.each do |route|
       options += "<option going='1' value='#{route.id}'>#{route.name}, #{route.start_bus_stop.name} - #{route.end_bus_stop.name}</option>"+
                  "<option going='0' value='#{route.id}'>#{route.name}, #{route.end_bus_stop.name} - #{route.start_bus_stop.name}</option>"
@@ -33,7 +33,7 @@ class PublicMobileController < ApplicationController
     bus_stops = []
     bus_stops = RouteDetail.where(:route_id => params[:route_id]).collect{|rd| bus_stops << (params[:is_going]=="1") ? rd.start_bus_stops : rd.end_bus_stops }.flatten
     
-    options = ""
+    options = "<option></option>"
 
     bus_stops.each do |bus|
       options += "<option value='#{bus.id}'>#{bus.name}</option>"
