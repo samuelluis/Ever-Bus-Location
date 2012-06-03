@@ -4,8 +4,6 @@ class PublicController < ApplicationController
   end
   
   def filter
-    #params[:country_id]
-    #params[:city_id]
     is_going = (params[:is_going].to_i != 0)
     company = Company.find(params[:company_id].to_i)
     route = Route.find(params[:route_id].to_i)
@@ -58,7 +56,6 @@ class PublicController < ApplicationController
   end
   
   def reminder(time, travel_time)
-    reminder_time = time + travel_time.seconds
-    reminder_time
+    (time + travel_time.seconds)
   end
 end
