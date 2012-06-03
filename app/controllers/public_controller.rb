@@ -25,7 +25,7 @@ class PublicController < ApplicationController
     
     log = bus_log_stops.last
     
-    time = log.created_at
+    time = log.created_at.in_time_zone("Eastern Time (US & Canada)")
     travel_time = route_detail.route_branch.travel_time
     travel_time = travel_time.hour*60*60 + travel_time.min*60 + travel_time.sec
     
@@ -42,7 +42,7 @@ class PublicController < ApplicationController
               </div>
               <div id='at_time_div'>
                 <label>
-                  <b>At time: </b><span id='at_time'>#{log.created_at.strftime("%I:%M:%S %p")}</span>
+                  <b>At time: </b><span id='at_time'>#{log.created_at.in_time_zone("Eastern Time (US & Canada)").strftime("%I:%M:%S %p")}</span>
                 </label>
               </div>
               <div id='supposed_arrival_time_div'>
