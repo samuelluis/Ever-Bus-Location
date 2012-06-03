@@ -1,4 +1,6 @@
 Everbuslocation::Application.routes.draw do
+  get "public_mobile/index"
+
   get "public/index"
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
@@ -8,6 +10,13 @@ Everbuslocation::Application.routes.draw do
   root :to => "public#index"
   
   match '/public/filter' => 'public#filter'
+  
+  #PublicMobile
+  match '/public_mobile/getCountries' => 'public_mobile#getCountries'
+  match '/public_mobile/getCities' => 'public_mobile#getCities'
+  match '/public_mobile/getCompanies' => 'public_mobile#getCompanies'
+  match '/public_mobile/getRoutes' => 'public_mobile#getRoutes'
+  match '/public_mobile/getBusStops' => 'public_mobile#getBusStops'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

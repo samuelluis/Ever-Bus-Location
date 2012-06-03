@@ -1,0 +1,208 @@
+<script>
+    
+    var fetchingCountries = null;
+    var fetchingCities = null;
+    var fetchingCompanies = null;
+    var fetchingRoutes = null;
+    var fetchingStopbuses = null;
+    
+    var utils = {
+        convertToOptions : function(jsonData, attributes){
+            options = "<option></option>";
+            
+            if(!attributes){
+                attributes = "";
+            }
+            
+            $(jsonData).each(function(){
+                options += "<option " + attributes + " value='" + this.id + "'>" + this.name + "</option>"
+            });
+            return options;
+        },
+        convertToJson : function(stringData){
+            return eval("(" + stringData + ")");
+        }
+    }
+    
+    //SETTING FILTERS
+    var filters = {
+        init : function(){
+            alert("Initializing...");
+            this.setFilters();
+        },
+        setFilters : function(){
+            this.setChangeEventOnSelects();
+            this.fillCountrySelect();
+        },
+        setChangeEventOnSelects : function(){
+             $("#select_country").bind({
+                 change : this.fillCitySelect
+             });
+             $("#select_city").bind({
+                 change : this.fillCompanySelect,
+             });
+             $("#select_company").bind({
+                 change : this.fillRouteSelect
+             });
+             $("#select_route").bind({
+                 change : this.fillStopbusSelect
+             });
+         },
+        fillCountrySelect : function(){
+            if(fetchingCountries){
+                fetchingCountries.abort();
+            }
+            fetchingCountries = $.ajax({
+                type:"POST",
+                url:"/public_mobile/getCountries",
+                success: function(data){
+                    countries = utils.convertToJson(data);
+                    $("#select_country").html(utils.convertToOptions(countries, null));
+                    fetchingCountries = null;
+                }
+            });
+        },
+        fillCitySelect : function(e){
+            //if this is: undefined, null or letters
+            country = $(this).val();
+            
+            if(!(country>0)){
+                country = "";
+            }
+            if(fetchingCities){
+                fetchingCities.abort();
+            }
+            fetchingCities = $.ajax({
+                type:"POST",
+                url: "/public_mobile/getCities",
+                data: {country_id:country},
+                success: function(data){
+                    cities = utils.convertToJson(data);
+                    $("#select_city").html(utils.convertToOptions(cities, null));
+                    fetchingCities = null;
+                }
+            });
+            $("#select_city").trigger("change");
+        },
+        fillCompanySelect : function(){
+            //if this is: undefined, null or letters
+            city = $(this).val();
+            
+            if(!(city>0)){
+                city = "";
+            }
+            if(fetchingCompanies){
+                fetchingCompanies.abort();
+            }
+            fetchingCompanies = $.ajax({
+                type:"POST",
+                url:"/public_mobile/getCompanies",
+                data:{city_id:city},
+                success: function(data){
+                    companies = utils.convertToJson(data);
+                    $("#select_company").html(utils.convertToOptions(companies, null));
+                    fetchingCompanies = null;
+                }
+            });
+            $("#select_company").trigger("change");
+        },
+        fillRouteSelect : function(company){
+            //if this is: undefined, null or letters
+            company = $(this).val();
+            
+            if(!(company>0)){
+                company = "";
+            }
+            if(fetchingRoutes){
+                fetchingRoutes.abort();
+            }
+            fetchingRoutes = $.ajax({
+                type:"POST",
+                url:"/public_mobile/getRoutes",
+                data:{company_id:company},
+                success: function(data){
+                                        
+                    options = data;
+                    
+                    $("#select_route").html(options);
+                    fetchingRoutes = null;
+                }
+            });
+            $("#select_route").trigger("change");
+        },
+        fillStopbusSelect : function(route){
+            //if this is: undefined, null or letters
+            var route = $(this).val();
+            var is_going = $(this).find("option:selected").attr("going");
+                        
+            if(!(route>0)){
+                route = "";
+            }
+            if(fetchingStopbuses){
+                fetchingStopbuses.abort();
+            }
+            fetchingStopbuses = $.ajax({
+                type:"POST",
+                url:"/public_mobile/getBusStops",
+                data:{route_id:route, is_going:is_going},
+                success: function(data){
+                    $("#select_stopbus").html(data);
+                    fetchingStopbuses = null;
+                }
+            });
+            $("#select_stopbus").trigger("change");
+        }
+    };    
+    
+    $(function(){
+        
+        filters.init();
+        
+    });
+    
+</script>
+
+<div>
+    <div id="loading"></div>
+
+    <div id="filters">
+        <div id="select_country_div" class="filter">
+            <select id="select_country"></select>
+        <div>
+        <div id="select_city_div" class="filter">
+            <select id="select_city"></select>
+        <div>
+        <div id="select_company_div" class="filter">
+            <select id="select_company"></select>
+        <div>
+        <div id="select_route_div" class="filter">
+            <select id="select_route"></select>
+        <div>
+        <div id="select_stopbus_div" class="filter">
+            <select id="select_stopbus"></select>
+        <div>
+    </div>
+    
+    <div id="message">
+        <div id="bus_name_div">
+            <label>
+                <b>Bus name :</b><span id="bus_name"></span>
+            </label>
+        </div>
+        <div id="last_stop_bus_div">
+            <label>
+                <b>Last bus stop :</b><span id="last_stop_bus"></span>
+            </label>
+        </div>
+        <div id="at_time_div">
+            <label>
+                <b>At time :</b><span id="at_time"></span>
+            </label>
+        </div>
+        <div id="supposed_arrival_time_div">
+            <label>
+                <b>Suppose arrival time :</b><span id="supposed_arrival_time"></span>
+            </label>
+        </div>
+    </div>
+</div>
