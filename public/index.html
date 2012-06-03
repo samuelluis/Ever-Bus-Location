@@ -1,4 +1,9 @@
 <script language="javascript" src="jquery/jquery.js"></script>
+<script language="javascript" src="jquery/jquery-ui-1.8.13.custom.min.js"></script>
+<script language="javascript" src="public_mobile.js"></script>
+<link href="jquery/smoothness/jquery-ui-1.8.4.custom.css" media="all" rel="stylesheet" type="text/css">
+<link href="style.css" media="all" rel="stylesheet" type="text/css">
+<link href="960.css" media="all" rel="stylesheet" type="text/css">
 <script>
     
     var fetchingCountries = null;
@@ -178,30 +183,39 @@
         
     });
 
+		$(function() {
+				$( "select" ).combobox();
+				$("#filters_btn").button();
+			});
+
 </script>
 
-<div>
+<div class="container_16">
     <div id="loading"></div>
 
-    <div id="filters">
-        <div id="select_country_div" class="filter">
-            <b>Country: </b><select id="select_country" style="margin-left:11px"></select>
+    <div id="filters" class="grid_6 push_5" style="float:left;">
+			<table>
+        <div id="select_country_div" class="filter" style="margin-left:11px">
+            <b>Country: </b><select id="select_country"></select>
         </div>
-        <div id="select_city_div" class="filter">
-            <b>City: </b><select id="select_city" style="margin-left:40px"></select>
+        <div id="select_city_div" class="filter" style="margin-left:40px">
+            <b>City: </b><select id="select_city"></select>
         </div>
-        <div id="select_company_div" class="filter">
-            <b>Company: </b><select id="select_company" style="margin-left:2px"></select>
+        <div id="select_company_div" class="filter" style="margin-left:2px">
+            <b>Company: </b><select id="select_company"></select>
         </div>
-        <div id="select_route_div" class="filter">
-            <b>Route: </b><select id="select_route" style="margin-left:28px"></select>
+        <div id="select_route_div" class="filter" style="margin-left:28px">
+            <b>Route: </b><select id="select_route"></select>
         </div>
-        <div id="select_stopbus_div" class="filter">
-            <b>Bus Stop: </b><select id="select_stopbus" style="margin-left:8px"></select>
+        <div id="select_stopbus_div" class="filter" style="margin-left:8px">
+            <b>Bus Stop: </b><select id="select_stopbus"></select>
         </div>
+				<div style="height:30px;float:left;">
+					<button id="filters_btn" style="height:40px;position:relative;" />Filter</button>
+				</div>
+			</table>
     </div>
     <input type="hidden" name="is_going" id="is_going" value="0" />
-	<div><button id="filters_btn" />Filter</button></div>
 	
 	<p id="response"></p>
 </div>
