@@ -31,7 +31,7 @@ class PublicMobileController < ApplicationController
 
   def getBusStops
     bus_stops = []
-    bus_stops = RouteDetail.where(:route_id => params[:route_id]).collect{|rd| bus_stops << (params[:is_going]=="1") ? rd.start_bus_stops : rd.end_bus_stops }.flatten
+    bus_stops = RouteDetail.where(:route_id => params[:route_id]).collect{|rd| bus_stops << (params[:is_going]=="1") ? rd.start_bus_stops : rd.end_bus_stops }.flatten.uniq
     
     options = "<option></option>"
 
