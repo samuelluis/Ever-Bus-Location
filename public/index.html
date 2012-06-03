@@ -186,7 +186,6 @@
 		$(function() {
 				$( "select" ).combobox();
 				$("#filters_btn").button();
-				$("#clear_btn").button();
 			});
 
 </script>
@@ -199,7 +198,7 @@
 	        <div id="select_country_div" class="filter" style="margin-left:11px">
 	            <b>Country: </b><select id="select_country"></select>
 	        </div>
-	        <div id="select_city_div" class="filter" style="margin-left:40px">
+	        <div id="select_city_div" class="filter" style="margin-left:42px">
 	            <b>City: </b><select id="select_city"></select>
 	        </div>
 	        <div id="select_company_div" class="filter" style="margin-left:2px">
@@ -211,13 +210,11 @@
 	        <div id="select_stopbus_div" class="filter" style="margin-left:8px">
 	            <b>Bus Stop: </b><select id="select_stopbus"></select>
 	        </div>
-					<div style="height:40px;margin-top:10px;margin-left:80px;">
+					<div style="height:40px;margin-top:10px;margin-left:140px;">
 						<button id="filters_btn" style="height:40px;position:relative;" />Filter</button>
-							<button id="clear_btn" style="height:40px;position:relative;" />Cancel</button>
 					</div>
 	    </div>
 	    <input type="hidden" name="is_going" id="is_going" value="0" />
-	
-			<p id="response" class="grid_6 push_5" style="float:left;"></p>
+			<p id="response" style="float:left;"></p>
 		</fieldset>
 </div>
