@@ -1,3 +1,4 @@
+# encoding: utf-8
 namespace :db do
   
   task :countries => :environment do
@@ -13,7 +14,6 @@ namespace :db do
       Rake::Task["db:#{task}"].invoke
     end
     
-    # encoding: utf-8
     City.create([
       {:name => "Santo Domingo", :alias => "SD", :country_id => Country.find_by_name("Dominican Republic").id},
       {:name => "Distrito Nacional", :alias => "DN", :country_id => Country.find_by_name("Dominican Republic").id},
