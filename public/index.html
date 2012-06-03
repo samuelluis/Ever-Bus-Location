@@ -54,7 +54,7 @@
             }
             fetchingCountries = $.ajax({
                 type:"POST",
-                url:"/public_mobile/getCountries",
+                url:"http://everbuslocation.herokuapp.com/public_mobile/getCountries",
                 success: function(data){
                     countries = utils.convertToJson(data);
                     $("#select_country").html(utils.convertToOptions(countries, null));
@@ -74,7 +74,7 @@
             }
             fetchingCities = $.ajax({
                 type:"POST",
-                url: "/public_mobile/getCities",
+                url: "http://everbuslocation.herokuapp.com/public_mobile/getCities",
                 data: {country_id:country},
                 success: function(data){
                     cities = utils.convertToJson(data);
@@ -96,7 +96,7 @@
             }
             fetchingCompanies = $.ajax({
                 type:"POST",
-                url:"/public_mobile/getCompanies",
+                url:"http://everbuslocation.herokuapp.com/public_mobile/getCompanies",
                 data:{city_id:city},
                 success: function(data){
                     companies = utils.convertToJson(data);
@@ -118,7 +118,7 @@
             }
             fetchingRoutes = $.ajax({
                 type:"POST",
-                url:"/public_mobile/getRoutes",
+                url:"http://everbuslocation.herokuapp.com/public_mobile/getRoutes",
                 data:{company_id:company},
                 success: function(data){
                                         
@@ -143,7 +143,7 @@
             }
             fetchingStopbuses = $.ajax({
                 type:"POST",
-                url:"/public_mobile/getBusStops",
+                url:"http://everbuslocation.herokuapp.com/public_mobile/getBusStops",
                 data:{route_id:route, is_going:is_going},
                 success: function(data){
                     $("#select_stopbus").html(data);
@@ -167,7 +167,7 @@
     		if(fetchingFilters) fetchingFilters.abort();
     		fetchingFilters = $.ajax({
     			type:"POST",
-    			url:"/public/filter",
+    			url:"http://everbuslocation.herokuapp.com/public/filter",
     			data:{country_id:$("#select_country").val(), city_id:$("#select_city").val(), company_id:$("#select_company").val(), route_id:$("#select_route").val(), is_going:$("#is_going").val(), bus_stop_id:$("#select_stopbus").val()},
     			success: function(data){
     				fetchingFilters = null;
