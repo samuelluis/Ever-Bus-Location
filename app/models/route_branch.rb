@@ -4,7 +4,7 @@ class RouteBranch < ActiveRecord::Base
   has_many :route_details
   
   def name
-    "#{start_bus_stop.name} - #{end_bus_stop.name}"
+    new_record? ? "" : "#{start_bus_stop.name} - #{end_bus_stop.name}"
   end
   
 end

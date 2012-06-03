@@ -3,8 +3,8 @@
 		<title>Ever Bus Location</title>
 	</head>
 	<body>
-		<div id="filters">
-			<form action="/public/filter" method="post">
+		<div>
+			<form id="filters" action="/public/filter" method="post">
 				<div id="country_field">
 					<%= select_tag "country_id", options_from_collection_for_select(Country.all, "id", "name"), :include_blank => true, :id => "country_id", :placeholder => "Select a Country" %>
 				</div>
@@ -12,7 +12,7 @@
 					<%= select_tag "city_id", options_from_collection_for_select(City.all, "id", "name"), :include_blank => true, :id => "city_id", :placeholder => "Select a City" %>
 				</div>
 				<div id="company_field">
-					<%= select_tag "company_id", options_from_collection_for_select(Company.all, "id", "name"), :include_blank => true, :id => "company_id", :placeholder => "Select a Country" %>
+					<%= select_tag "company_id", options_from_collection_for_select(Company.all, "id", "name"), :include_blank => true, :id => "company_id", :placeholder => "Select a Company" %>
 				</div>
 				<div id="route_field">
 					<select name="route_id" id="route_id">
@@ -31,7 +31,7 @@
 			</form>
 		</div>
 		<div id="response_field">
-			<textarea id="response"></textarea>
+			<p id="response"></p>
 		</div>
 	</body>
 	<footer>

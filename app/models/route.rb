@@ -6,4 +6,7 @@ class Route < ActiveRecord::Base
   has_many :bus_log_stops, :through => :buses
   has_many :bus_stops, :through => :bus_log_stops
   has_many :route_details
+  has_many :route_branches, :through => :route_details
+  has_many :start_bus_stops, :class_name => "BusStop", :through => :route_branches, :source => :start_bus_stop
+  has_many :end_bus_stops, :class_name => "BusStop", :through => :route_branches, :source => :end_bus_stop
 end
