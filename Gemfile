@@ -7,7 +7,6 @@ gem 'ice_cube'
 gem 'state_machine'
 gem 'squeel'
 gem 'google-analytics-rails'
-gem 'sqlite3'
 gem 'hirb'
 gem 'jquery-rails'
 
