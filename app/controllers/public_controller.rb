@@ -28,7 +28,6 @@ class PublicController < ApplicationController
     log = bus_log_stops.last
     
     time = log.created_at
-    current_time = Time.now
     travel_time = route_detail.route_branch.travel_time
     
     text = ("<div id='message'>
@@ -49,7 +48,7 @@ class PublicController < ApplicationController
               </div>
               <div id='supposed_arrival_time_div'>
                 <label>
-                  <b>Suppose arrival time: </b><span id='supposed_arrival_time'>#{reminder(time, current_time, travel_time)}</span>
+                  <b>Suppose arrival time: </b><span id='supposed_arrival_time'>#{reminder(time, travel_time)}</span>
                 </label>
               </div>
             </div>").html_safe
@@ -57,8 +56,8 @@ class PublicController < ApplicationController
     render :text => text
   end
   
-  def reminder(time, current_time, travel_time)
-    #reminder_time = current_time+(travel_time-(current_time-time)).seconds
+  def reminder(time, travel_time)
+    #reminder_time = time + travel_time.seconds
     reminder_time
   end
 end
