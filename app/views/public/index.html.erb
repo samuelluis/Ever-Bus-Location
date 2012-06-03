@@ -1,0 +1,40 @@
+<html>
+	<head>
+		<title>Ever Bus Location</title>
+	</head>
+	<body>
+		<div id="filters">
+			<form action="/public/filter" method="post">
+				<div id="country_field">
+					<%= select_tag "country_id", options_from_collection_for_select(Country.all, "id", "name"), :include_blank => true, :id => "country_id", :placeholder => "Select a Country" %>
+				</div>
+				<div id="city_field">
+					<%= select_tag "city_id", options_from_collection_for_select(City.all, "id", "name"), :include_blank => true, :id => "city_id", :placeholder => "Select a City" %>
+				</div>
+				<div id="company_field">
+					<%= select_tag "company_id", options_from_collection_for_select(Company.all, "id", "name"), :include_blank => true, :id => "company_id", :placeholder => "Select a Country" %>
+				</div>
+				<div id="route_field">
+					<select name="route_id" id="route_id">
+						<option></option>
+						<% Route.all.each do |route| %>
+							<option going="1" value="<%= route.id %>"><%= "#{route.name}, #{route.start_bus_stop.name} - #{route.end_bus_stop.name}" %></option>
+							<option going="0" value="<%= route.id %>"><%= "#{route.name}, #{route.end_bus_stop.name} - #{route.start_bus_stop.name}" %></option>
+						<% end %>
+					</select>
+					<input type="hidden" name="is_going" id="is_going" value="0" />
+				</div>
+				<div id="bus_stop_field">
+					<%= select_tag "bus_stop_id", options_from_collection_for_select(BusStop.all, "id", "name"), :include_blank => true, :id => "bus_stop_id", :placeholder => "Select a Bus Stop" %>
+				</div>
+				<div><input type="submit" value="Filter" class="btn primary" /></div>
+			</form>
+		</div>
+		<div id="response_field">
+			<textarea id="response"></textarea>
+		</div>
+	</body>
+	<footer>
+		Developed By Kindness on Rails ®
+	</footer>
+</html>

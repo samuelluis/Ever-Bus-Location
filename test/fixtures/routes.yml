@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  start_bus_stop: 
+  end_bus_stop: 
+  company: 
+
+two:
+  name: MyString
+  start_bus_stop: 
+  end_bus_stop: 
+  company: 

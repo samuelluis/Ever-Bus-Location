@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  start_bus_stop: 
+  end_bus_stop: 
+  travel_time: 2012-06-02 19:51:16
+
+two:
+  start_bus_stop: 
+  end_bus_stop: 
+  travel_time: 2012-06-02 19:51:16

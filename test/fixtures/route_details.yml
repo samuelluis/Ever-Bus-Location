@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  position_order: 1
+  is_going: false
+  route: 
+  route_branch: 
+
+two:
+  position_order: 1
+  is_going: false
+  route: 
+  route_branch: 
